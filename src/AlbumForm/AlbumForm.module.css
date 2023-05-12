@@ -1,0 +1,43 @@
+.formDiv{
+    width: 50vw;
+    margin: 50px auto;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formDiv input{
+    width: 65%;
+    height: 40px;
+    border-radius: 30px;
+    padding-left: 10px;
+    border: 3px solid transparent;
+
+}
+
+.formDiv button{
+    height: 40px;
+    margin-left: 10px;
+    width: 80px;
+    border-radius: 2px;
+    color: whitesmoke;
+    border: 3px solid transparent;
+    cursor: pointer;
+}
+
+.cancleBtn{
+    
+    background-color: red;
+    
+}
+
+.createBtn{
+    
+    background-color: blue;
+    
+}

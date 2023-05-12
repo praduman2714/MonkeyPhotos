@@ -1,0 +1,25 @@
+.navBar{
+    /* display: flex; */
+    background-color: blue;
+    height: 10vh;
+    /* justify-content: space-between; */
+}
+
+.logo{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 30px;
+    cursor: pointer;
+    /* margin-top: 5px; */
+}
+
+.logo img{
+    height: 9vh;
+}
+.logo span{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
