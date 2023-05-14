@@ -1,0 +1,33 @@
+.formDiv{
+    /* border: 1px solid blue; */
+    width: 60vw;
+    margin-left: 7vw;
+    margin-top: 20px;
+    background-color: rgba(210, 207, 207, 0.411);
+}
+
+form input{
+    width: 80%;
+    height: 3vh;
+    margin-top: 10px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    padding  : 10px
+}
+
+form button{
+    margin-left: 20px;
+    margin-bottom: 10px;
+    width: 100px;
+    height: 35px;
+}
+.cancleBtn{
+    background-color: red;
+    border: 1px solid transparent;
+    color: whitesmoke;
+}
+.createBtn{
+    background-color: blue;
+    border: 1px solid transparent;
+    color: whitesmoke;
+}

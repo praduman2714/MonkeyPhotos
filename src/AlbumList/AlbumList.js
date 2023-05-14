@@ -8,10 +8,12 @@ import albumImage from '../Assets/photos.png'
 
 // importing Firebase
 import {db} from '../firebaseInit';
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 
 // importing Components
-import AlbumForm from '../AlbumForm/AlbumForm'
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import AlbumForm from '../AlbumForm/AlbumForm';
+import ImageList from "../ImageList/ImageList";
+
 
 function AlbumList(){
     const [isForm , setIsForm] = useState(false); // for rendering the albumForm page
@@ -57,6 +59,10 @@ function AlbumList(){
         setViewImages(name);
     }
 
+    const handleBack = ()=>{
+        setViewImages(null);
+    }
+
     // console.log(albums);
 
     return (
@@ -81,7 +87,10 @@ function AlbumList(){
                     ))}
                 </div>
             </div>}
-           {/* Disply the else conditon */}
+           {viewImages && 
+            <ImageList onBack = {handleBack}
+            albumId={albums.find((a) => a.name === viewImages).id}
+            albumName={viewImages}/>}
         </>
     )
 }
