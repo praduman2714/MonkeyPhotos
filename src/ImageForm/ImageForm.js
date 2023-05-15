@@ -1,7 +1,7 @@
 // imported Stye
 import Style from './ImageForm.module.css';
 // imported some dependencies from the react.
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef , useCallback} from 'react';
 
 // main function for the ImagesForm
 function ImageForm({loading, onAdd, albumName , onUpdate, updateImageIntent}){
@@ -19,16 +19,20 @@ function ImageForm({loading, onAdd, albumName , onUpdate, updateImageIntent}){
     }
 
     // Hnadle Default while updating
-    const handleDefaultValues = () => {
+    // const handleDefaultValues = () => {
+    //     ImageName.current.value = updateImageIntent.name;
+    //     ImageURL.current.value = updateImageIntent.url;
+    // };
+    const handleDefaultValues = useCallback(() => {
         ImageName.current.value = updateImageIntent.name;
         ImageURL.current.value = updateImageIntent.url;
-    };
+    }, [updateImageIntent]);
     // Component did update
     useEffect(() =>{
         if(updateImageIntent){
             handleDefaultValues();
         }
-    }, [updateImageIntent])
+    }, [updateImageIntent , handleDefaultValues])
 
     // function when submit is cling in form
     const handleSubmit = (e) =>{
