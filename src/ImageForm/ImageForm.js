@@ -1,17 +1,24 @@
+// imported Stye
 import Style from './ImageForm.module.css';
+// imported some dependencies from the react.
 import { useEffect, useRef } from 'react';
 
+// main function for the ImagesForm
 function ImageForm({loading, onAdd, albumName , onUpdate, updateImageIntent}){
+    
+    // variable for the Images Naem , and url
     const ImageName = useRef();
     const ImageURL = useRef();
 
     // console.log(updateImageIntent);
 
+    // Handle Clear
     const handleClear = () =>{
         ImageName.current.value = "";
         ImageURL.current.value = "";
     }
 
+    // Hnadle Default while updating
     const handleDefaultValues = () => {
         ImageName.current.value = updateImageIntent.name;
         ImageURL.current.value = updateImageIntent.url;
@@ -23,6 +30,7 @@ function ImageForm({loading, onAdd, albumName , onUpdate, updateImageIntent}){
         }
     }, [updateImageIntent])
 
+    // function when submit is cling in form
     const handleSubmit = (e) =>{
         e.preventDefault();
         // console.log(formName);
@@ -36,6 +44,8 @@ function ImageForm({loading, onAdd, albumName , onUpdate, updateImageIntent}){
         
         handleClear();
     }
+
+    // UI of the ImagesForm
     return (
         <>
             <div className={Style.formDiv}>
