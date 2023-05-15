@@ -68,7 +68,7 @@ function ImageList({onBack, albumId, albumName}){
         }));
         setImages(imagesData);
         setLocalImages(imagesData);
-        console.log(localImages);
+        // console.log(localImages);
         setLoading(false);
     }
     // using useEffect as componentDidMount.
