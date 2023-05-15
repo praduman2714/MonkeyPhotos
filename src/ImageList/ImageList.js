@@ -55,6 +55,7 @@ function ImageList({onBack, albumId, albumName}){
     // 
     const [activeHoverImageIndex, setActiveHoverImageIndex] = useState(null);
 
+    // console.log(images);
     // function for taking all the images from the database
     const getImages = async()=>{
         setLoading(true);
@@ -81,31 +82,33 @@ function ImageList({onBack, albumId, albumName}){
 
     const handleAddImages = async(name, url)=>{
         setImagesLoading(true);
+        // console.log(name + " " + url);
         const imageRef = await addDoc(collection(db, "albums", albumId, "images"), {
-            name,
-            url,
-            created: Timestamp.now(),
-          });
+        name,
+        url,
+        created: Timestamp.now(),
+        });
         setImages((prev) => [{ id: imageRef.id, name, url }, ...prev]);
-        
+
         toast.success("Image added successfully.");
         setImagesLoading(false);
     }
+    
+      
     // function to handleUpdating of the images
-    const handleUpdate = async ({ title, url }) => {
+    const handleUpdate = async ({ name, url }) => {
         setImagesLoading(true);
         const imageRef = doc(db, "albums", albumId, "images", updateImageIntent.id);
     
         await setDoc(imageRef, {
-          title,
+          name,
           url,
         });
     
         const updatedImages = images.map((image) => {
           if (image.id === imageRef.id) {
-            return { id: imageRef.id, title, url };
+            return { id: imageRef.id, name, url };
           }
-          toast.success("Image Updated successfully.");
           return image;
         });
     
@@ -113,7 +116,7 @@ function ImageList({onBack, albumId, albumName}){
         toast.success("Image updated successfully.");
         setImagesLoading(false);
         setUpdateImageIntent(false);
-      };
+    };
     // Functional for deleting the images, which is associated with the images
     const handleDelete = async (e, id) => {
         e.stopPropagation();
@@ -134,7 +137,7 @@ function ImageList({onBack, albumId, albumName}){
     // This will handle the prev button
     const handlePrev = () =>{
         if(activeImageIndex === 0) return setActiveImageIndex(images.length - 1);
-        setActiveImageIndex((prev) => prev+1);
+        setActiveImageIndex((prev) => prev-1);
     }
     // This will handle the cancle button
     const handleCancle = () =>{
@@ -182,7 +185,8 @@ function ImageList({onBack, albumId, albumName}){
                             </div>
                         )}
                         <div onClick={handleSearchIntent}>
-                            <img alt='Search'  src={searchIntent ? cancleImage : searchImage} />
+                            {images.length !== 0 && 
+                            <img alt='Search'  src={searchIntent ? cancleImage : searchImage} />}
                         </div>
                         <button className= {imageForm ? Style.cancleBtn : ''}
                         onClick={handleImageForm}>{imageForm ? 'Cancle' : 'Add Image'}</button>

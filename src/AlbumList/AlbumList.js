@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 // importing Firebase
 import {db} from '../firebaseInit';
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
 
 // importing Components
 import AlbumForm from '../AlbumForm/AlbumForm';
@@ -27,18 +27,22 @@ function AlbumList(){
     const[albumLoad, setAlbumLoad] = useState(false);
     // this hook is for opening the current album
     const[viewImages, setViewImages] = useState(null);
+    // hook for loading
+    const[loading, setLoading] = useState(false);
 
     // this function will show the new album which will added to the DB, in real time.
     const getAlbums = async() =>{
-        const unsub = onSnapshot(collection(db, 'albums') , (snapshot) =>{
-            const albumsList = snapshot.docs.map((doc)=>{
-                return {
-                    id : doc.id,
-                    ...doc.data()
-                }
-            })
-            setAlbums(albumsList);
-        })
+        setLoading(true);
+        const albumsRef = collection(db, "albums");
+        const albumsSnapshot = await getDocs(
+        query(albumsRef, orderBy("created", "desc"))
+        );
+        const albumsData = albumsSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        }));
+        setAlbums(albumsData);
+        setLoading(false);
     }   
     // using hook as ComponentDidMount
     useEffect(()=>{
