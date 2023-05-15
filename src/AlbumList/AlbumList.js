@@ -6,6 +6,10 @@ import Style from './AlbumList.module.css';
 // importing images of the albums
 import albumImage from '../Assets/photos.png'
 
+// importing Toast 
+import { toast } from "react-toastify";
+
+
 // importing Firebase
 import {db} from '../firebaseInit';
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
@@ -24,6 +28,7 @@ function AlbumList(){
     // this hook is for opening the current album
     const[viewImages, setViewImages] = useState(null);
 
+    // this function will show the new album which will added to the DB, in real time.
     const getAlbums = async() =>{
         const unsub = onSnapshot(collection(db, 'albums') , (snapshot) =>{
             const albumsList = snapshot.docs.map((doc)=>{
@@ -35,14 +40,15 @@ function AlbumList(){
             setAlbums(albumsList);
         })
     }   
-
+    // using hook as ComponentDidMount
     useEffect(()=>{
         getAlbums();
     }, [])
 
+    // function for adding new Albums to the DB
     const addAlbum = async (name) =>{
         if (albums.find((a) => a.name === name))
-            //return toast.error("Album name already in use.");
+            return toast.error("Album name already in use.");
         setAlbumLoad(true);
         
         const albumRef = await addDoc(collection(db, 'albums'), {
@@ -52,19 +58,21 @@ function AlbumList(){
         setAlbums((prev) => [{id : albumRef.id , name} , ...prev]);
         setAlbumLoad(false);
         // toast sussfully messages
+        toast.success("Album Added successfully.");
     }
 
+    // Used for redering to the albums folder
     const handleClick = (name) =>{
         if(viewImages === name) return setViewImages(null);
         setViewImages(name);
     }
-
+    // when we will click on the back, in album folder, it will redirect to tthis page
     const handleBack = ()=>{
         setViewImages(null);
     }
 
     // console.log(albums);
-
+    // Returing the UI
     return (
 
         <>
@@ -75,7 +83,8 @@ function AlbumList(){
            <div className={Style.mainDiv}>
                 <div className={Style.AlbumTop}>
                     <h2>All Albums </h2>
-                    <button onClick={() => setIsForm(isForm ? false : true)}>{!isForm ? 'Add Album' : 'Cancle'}</button>
+                    <button className={isForm ? Style.cancle : ''}
+                    onClick={() => setIsForm(isForm ? false : true)}>{!isForm ? 'Add Album' : 'Cancle'}</button>
                 </div>
 
                 <div className={Style.albumsList}>
@@ -87,6 +96,8 @@ function AlbumList(){
                     ))}
                 </div>
             </div>}
+
+            {/* Conditional rendering for the ImagesLIst */}
            {viewImages && 
             <ImageList onBack = {handleBack}
             albumId={albums.find((a) => a.name === viewImages).id}

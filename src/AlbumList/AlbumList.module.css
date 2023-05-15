@@ -43,6 +43,13 @@
     border: 2px solid rgb(255, 19, 0);
 }
 
+.AlbumTop .cancle{
+    background-color: red;
+    color: #f5f5f5;
+    border: 1px solid transparent;
+
+}
+
 .albumsList {
     display: grid;
     grid-template: repeat(1, 150px) / repeat(auto-fit, minmax(150px, 0.5fr));
@@ -67,6 +74,8 @@
     transition: border-color 0.3s;
 }
 
+
+
 .album span {
     justify-self: baseline;
     width: 100%;
@@ -80,6 +89,7 @@
 
 .album img {
     width: 50px;
+    height: 50px;
     margin-bottom: 30px;
 }
 

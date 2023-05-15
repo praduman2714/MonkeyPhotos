@@ -1,14 +1,16 @@
-// Importing Css 
+// Importing Css and some usefule dependeies from the react.
 import { useRef } from 'react';
 import Style from './AlbumForm.module.css'
 
+// main funciton for album form
 function AlbumForm({addAlbum , loading}){
+    // variable used for formName, which will used to store the name of the albums
     const formName = useRef();
-
+    // function for clearing the images
     const handleClear = () =>{
         formName.current.value = "";
     }
-
+    // function will fire, when we will submit the form
     const handleSubmit = (e) =>{
         e.preventDefault();
         // console.log(formName);
@@ -17,6 +19,8 @@ function AlbumForm({addAlbum , loading}){
         addAlbum(albumName);
         handleClear();
     }
+
+    // return the UI 
     return (
         <>
             <div className={Style.formDiv}>

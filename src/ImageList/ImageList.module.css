@@ -7,6 +7,12 @@
     margin-top: 20px;
     /* border: 1px solid red; */
 }
+.loader {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .upperPart{
     display: flex;
     justify-content: space-between;
@@ -44,15 +50,44 @@ div button{
 }
 
 .image{
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative; 
+}
+.searchBar{
+  margin-top: 13px;
+  margin-right: 20px;
+  
+}
+.searchBar input{
+  height: 15px;
+  border-radius: 30px;
+  padding: 10px;
+}
+.srcImg{
+  /* height: 30px;
+  margin-top: 30px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+ 
+.srcImg img{
+  margin-top: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.cancleBtn{
+  background-color: red;
+  color: whitesmoke;
+  border: 1px solid transparent;
 }
 
 .image > img {
